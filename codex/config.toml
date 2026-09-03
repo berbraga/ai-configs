@@ -1,0 +1,25 @@
+[marketplaces.i-have-adhd]
+source_type = "git"
+source = "https://github.com/ayghri/i-have-adhd.git"
+ref = "main"
+
+[marketplaces.ecc]
+source_type = "git"
+source = "https://github.com/affaan-m/ECC.git"
+
+[marketplaces.superpowers-dev]
+source_type = "git"
+source = "https://github.com/obra/superpowers.git"
+
+[plugins."i-have-adhd@i-have-adhd"]
+enabled = true
+
+[plugins."ecc@ecc"]
+enabled = true
+
+[plugins."superpowers@superpowers-dev"]
+enabled = true
+
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "pull-request-number", "approval-mode", "context-remaining", "context-used", "five-hour-limit", "weekly-limit", "codex-version", "context-window-size", "used-tokens", "workspace-headline", "task-progress"]
+status_line_use_colors = true

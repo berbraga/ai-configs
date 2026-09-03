@@ -1,0 +1,12 @@
+.DS_Store
+*.bak
+*.log
+.env
+.env.*
+!.env.example
+auth.json
+credentials.json
+session-data/
+sessions/
+cache/
+tmp/

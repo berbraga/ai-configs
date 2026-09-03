@@ -1,0 +1,3 @@
+prefix_rule(pattern=["rtk", "proxy", "codex", "plugin", "marketplace", "add"], decision="allow")
+prefix_rule(pattern=["rtk", "proxy", "codex", "plugin", "add"], decision="allow")
+prefix_rule(pattern=["rtk", "proxy", "python3", "/home/bernardo/.codex/skills/.system/skill-installer/scripts/list-skills.py"], decision="allow")
