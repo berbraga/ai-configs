@@ -17,12 +17,30 @@ para não apagar configurações locais específicas de cada máquina.
 ## Inicialização
 
 ```bash
-git clone git@github.com:berbraga/ai-configs.git
-cd ai-configs
+gh repo clone berbraga/ai-configs ~/ai-configs
+cd ~/ai-configs
 ./install.sh
 ```
 
-Depois, reinstale os plugins listados em `plugins.md` e reinicie o Claude Code/Codex.
+O script instala o rtk, os plugins do Claude Code (incluindo superpowers), o graphify e o Obsidian sozinho.
+Ao abrir o Claude Code num repositório git sem `graphify-out/graph.json`, um hook cria o grafo em
+segundo plano (só código, local, sem custo de API) e coloca `graphify-out/` no `.git/info/exclude`. Os plugins do Codex
+estão em `plugins.md`. Depois, reinicie o Claude Code/Codex.
+
+## Memória do Claude
+
+A memória fica no cofre do Obsidian em `~/Obsidian/Claude/memory` (repositório privado
+`berbraga/obsidian`, clonado pelo `install.sh`). Os hooks do `claude/settings.json` fazem
+`git pull` ao abrir uma sessão e commit + push ao fechar.
+
+## Mudei algo numa máquina
+
+```bash
+cd ~/ai-configs && git pull && ./install.sh
+```
+
+Para levar uma mudança local para o repositório: `cp ~/.claude/settings.json claude/`, depois
+`git commit -am "..." && git push`.
 
 ## Atualização
 

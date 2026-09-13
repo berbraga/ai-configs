@@ -1,5 +1,87 @@
 {
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "sonnet",
   "hooks": {
-    "PreToolUse": []
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -d ~/Obsidian/.git ] && timeout 20 git -C ~/Obsidian pull -q --rebase --autostash >/dev/null 2>&1; true"
+          },
+          {
+            "type": "command",
+            "command": "d=$(git rev-parse --show-toplevel 2>/dev/null) && cd \"$d\" && [ ! -f graphify-out/graph.json ] && command -v graphify >/dev/null && { x=$(git rev-parse --git-path info/exclude); grep -qxF graphify-out/ \"$x\" 2>/dev/null || echo graphify-out/ >> \"$x\"; setsid -f sh -c 'graphify extract . --code-only && graphify cluster-only .' >/dev/null 2>&1; }; true"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -d ~/Obsidian/.git ] && setsid -f sh -c 'cd ~/Obsidian && git add -A && { git diff --cached --quiet || git commit -qm \"sync: $(hostname)\"; } && timeout 20 git pull -q --rebase --autostash && timeout 20 git push -q' >/dev/null 2>&1; true"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "refreshInterval": 1
+  },
+  "enabledPlugins": {
+    "i-have-adhd@i-have-adhd": true,
+    "ponytail@ponytail": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "i-have-adhd": {
+      "source": {
+        "source": "github",
+        "repo": "ayghri/i-have-adhd"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": false,
+  "effortLevel": "high",
+  "autoMemoryDirectory": "~/Obsidian/Claude/memory",
+  "autoCompactEnabled": true,
+  "autoCompactWindow": 200000,
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "agentPushNotifEnabled": true,
+  "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Running `npm run db:push` (or the same script via pnpm, yarn, or bun): pushes schema changes straight to the database",
+      "Running `npm run db:apply:prod` (or the same script via pnpm, yarn, or bun): applies changes to the production database",
+      "Running `scripts/deploy.sh`, directly or via bash/sh: deploys the application"
+    ],
+    "hard_deny": [
+      "$defaults",
+      "Committing Secrets: `git add`, `git commit`, or `git push` (or equivalent) that puts a real secret into a commit, to any repo, trusted or not: API keys, tokens, passwords, private keys, or sensitive files such as `.env`, `*.pem`, `id_rsa`, `credentials*`. Blocks even if the user asks. Templates with placeholder values (e.g. `.env.example`) are not secrets"
+    ]
   }
 }
