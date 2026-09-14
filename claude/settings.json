@@ -42,7 +42,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash \"$HOME/.claude/statusline.sh\"",
+    "command": "bash \"$HOME/.claude/statusline.sh\" 2>>\"$HOME/.claude/statusline-debug.log\"",
     "refreshInterval": 1
   },
   "enabledPlugins": {
