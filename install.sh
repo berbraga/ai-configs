@@ -4,6 +4,11 @@ set -euo pipefail
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 backup_dir="${HOME}/.ai-configs-backup/$(date +%Y%m%d-%H%M%S)"
 
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*) is_windows=1 ;;
+  *) is_windows=0 ;;
+esac
+
 install_file() {
   local source="$1" target="$2"
   if [[ -e "$target" ]]; then
@@ -31,15 +36,25 @@ if [[ -d "$repo_dir/codex/skills" ]]; then
 fi
 
 if ! command -v rtk >/dev/null; then
-  curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+  if [[ "$is_windows" -eq 1 ]]; then
+    rtk_version="$(curl -sI https://github.com/rtk-ai/rtk/releases/latest | grep -i '^location:' | sed -E 's|.*/tag/([^[:space:]]+).*|\1|' | tr -d '\r')"
+    mkdir -p "$HOME/.local/bin"
+    curl -fsSL -o "$HOME/.local/bin/rtk.zip" "https://github.com/rtk-ai/rtk/releases/download/${rtk_version}/rtk-x86_64-pc-windows-msvc.zip"
+    unzip -oq "$HOME/.local/bin/rtk.zip" -d "$HOME/.local/bin"
+    rm "$HOME/.local/bin/rtk.zip"
+  else
+    curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+  fi
 fi
 
 # Memória do Claude fica no cofre do Obsidian (autoMemoryDirectory); hooks do settings.json sincronizam via git.
 if command -v flatpak >/dev/null; then
   flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   flatpak install --user -y --noninteractive flathub md.obsidian.Obsidian
+elif [[ "$is_windows" -eq 1 ]] && command -v winget >/dev/null; then
+  winget install -e --id Obsidian.Obsidian --accept-package-agreements --accept-source-agreements
 else
-  echo "flatpak não encontrado: instale o Obsidian manualmente (https://obsidian.md)."
+  echo "Instale o Obsidian manualmente (https://obsidian.md)."
 fi
 if [[ ! -e "$HOME/Obsidian" ]]; then
   gh repo clone berbraga/obsidian "$HOME/Obsidian"

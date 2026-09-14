@@ -7,6 +7,9 @@ Configurações pessoais reproduzíveis para Claude Code e Codex CLI.
 Pré-requisitos: `git`, `curl`, [GitHub CLI](https://cli.github.com) logado (`gh auth login`),
 [Claude Code](https://claude.com/claude-code) instalado e, no Linux, `flatpak` (para o Obsidian).
 
+No Windows, roda em **WSL** ou nativo via **Git Bash** (não roda direto no PowerShell — abra
+o `install.sh` a partir do Git Bash). No Windows nativo o Obsidian é instalado via `winget`.
+
 ```bash
 gh repo clone berbraga/ai-configs ~/ai-configs
 cd ~/ai-configs
