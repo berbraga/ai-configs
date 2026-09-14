@@ -65,7 +65,7 @@ if command -v flatpak >/dev/null; then
   flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   flatpak install --user -y --noninteractive flathub md.obsidian.Obsidian
 elif [[ "$is_windows" -eq 1 ]] && command -v winget >/dev/null; then
-  winget install -e --id Obsidian.Obsidian --accept-package-agreements --accept-source-agreements
+  winget install -e --id Obsidian.Obsidian --accept-package-agreements --accept-source-agreements || true
 else
   echo "Instale o Obsidian manualmente (https://obsidian.md)."
 fi
