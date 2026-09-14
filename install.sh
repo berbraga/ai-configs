@@ -9,6 +9,18 @@ case "$(uname -s)" in
   *) is_windows=0 ;;
 esac
 
+if ! ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+  cat <<'EOF'
+Sem acesso SSH ao GitHub. Gere uma chave e cadastre em https://github.com/settings/ssh/new:
+
+  ssh-keygen -t ed25519 -C "seu-email@exemplo.com" -f ~/.ssh/id_ed25519 -N ""
+  cat ~/.ssh/id_ed25519.pub
+
+Depois rode ./install.sh de novo.
+EOF
+  exit 1
+fi
+
 install_file() {
   local source="$1" target="$2"
   if [[ -e "$target" ]]; then
@@ -57,7 +69,7 @@ else
   echo "Instale o Obsidian manualmente (https://obsidian.md)."
 fi
 if [[ ! -e "$HOME/Obsidian" ]]; then
-  gh repo clone berbraga/obsidian "$HOME/Obsidian"
+  git clone git@github.com:berbraga/obsidian.git "$HOME/Obsidian"
 elif [[ ! -d "$HOME/Obsidian/.git" ]]; then
   echo "~/Obsidian já existe sem git: mova a pasta e rode ./install.sh de novo para baixar a memória."
 fi

@@ -4,14 +4,16 @@ Configurações pessoais reproduzíveis para Claude Code e Codex CLI.
 
 ## Instalação num computador novo
 
-Pré-requisitos: `git`, `curl`, [GitHub CLI](https://cli.github.com) logado (`gh auth login`),
+Pré-requisitos: `git`, `curl`, uma chave SSH cadastrada no GitHub
+([gerar e cadastrar](https://github.com/settings/ssh/new) se a máquina não tiver uma — o
+`install.sh` avisa e para logo no início se não conseguir autenticar),
 [Claude Code](https://claude.com/claude-code) instalado e, no Linux, `flatpak` (para o Obsidian).
 
 No Windows, roda em **WSL** ou nativo via **Git Bash** (não roda direto no PowerShell — abra
 o `install.sh` a partir do Git Bash). No Windows nativo o Obsidian é instalado via `winget`.
 
 ```bash
-gh repo clone berbraga/ai-configs ~/ai-configs
+git clone git@github.com:berbraga/ai-configs.git ~/ai-configs
 cd ~/ai-configs
 ./install.sh
 ```
