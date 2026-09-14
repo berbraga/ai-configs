@@ -9,7 +9,8 @@ case "$(uname -s)" in
   *) is_windows=0 ;;
 esac
 
-if ! ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+ssh_check="$(ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -T git@github.com 2>&1 || true)"
+if ! grep -q "successfully authenticated" <<<"$ssh_check"; then
   cat <<'EOF'
 Sem acesso SSH ao GitHub. Gere uma chave e cadastre em https://github.com/settings/ssh/new:
 
