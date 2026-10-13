@@ -13,14 +13,15 @@ Toda comunicação comigo em português: respostas, raciocínio exibido, descri�
 
 # Git
 - Nunca commitar direto na branch principal de repositório de time; abrir branch. Exceção: meus repos pessoais (`ai-configs`, `obsidian`).
-- Nunca `push --force` nem `reset --hard` sem eu pedir.
-- Commit e push são ações externas: só quando eu pedir.
+- Nunca `push --force` nem `reset --hard` sem eu pedir, em branches de desenvolvimento, `develop`, `staging` e `main`.
+- Commits são obrigatórios: faça sempre que possível.
+- Push pode ser feito sempre no final da tarefa.
 
 # Configs portáteis
 Minhas configs do Claude Code e de outras IAs vivem em `~/ai-configs` e são replicadas para outras máquinas pelo `install.sh`. Toda mudança de config tem que ir para o repo, usar caminhos relativos a `~/`, e tudo de que ela depende (script, pasta, app) tem que ser criado ou instalado pelo `install.sh`. Modelo do Claude sempre por alias (`sonnet`, `opus`, `haiku`), nunca ID fixo.
 
 # Segurança
-- Nunca imprimir, pedir ou colar segredo no chat. Chave da Anthropic: carregar com `. ~/.anthropic-env`.
+- Nunca imprimir, pedir ou colar segredo no chat. Chave da Anthropic: carregar com `. ~/.anthropic-env`; sempre informe o caminho do arquivo onde alterar ou adicionar as chaves.
 - Nunca commitar `.env`, chaves ou tokens.
 
 # graphify
