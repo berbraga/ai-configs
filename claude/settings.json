@@ -13,6 +13,15 @@
             "command": "rtk hook claude"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit|AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/obsidian-hook.py\" pretool 2>/dev/null || python \"$HOME/.claude/hooks/obsidian-hook.py\" pretool"
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -35,6 +44,16 @@
           {
             "type": "command",
             "command": "[ -d ~/Obsidian/.git ] && setsid -f sh -c 'cd ~/Obsidian && git add -A && { git diff --cached --quiet || git commit -qm \"sync: $(hostname)\"; } && timeout 20 git pull -q --rebase --autostash && timeout 20 git push -q' >/dev/null 2>&1; true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/obsidian-hook.py\" stop 2>/dev/null || python \"$HOME/.claude/hooks/obsidian-hook.py\" stop"
           }
         ]
       }

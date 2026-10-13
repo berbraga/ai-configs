@@ -52,6 +52,10 @@ Confira as regras do modo auto com `claude auto-mode config`.
 - O Claude salva preferências e correções suas ("sempre...", "nunca...", "lembra disso") como notas
   em `~/Obsidian/Claude/memory`, ligadas entre si por `[[links]]`.
 - Sincroniza sozinho: `git pull` ao abrir uma sessão, commit + push ao fechar.
+- Pastas `Projects/`, `Decisions/`, `Reference/` e `Pessoas/` em `~/Obsidian/Claude`, regras em `claude/OBSIDIAN.md`.
+- Hooks do cofre (`claude/hooks/obsidian-hook.py`):
+  - `PreToolUse`: antes de perguntar (`AskUserQuestion`) ou editar arquivo, o Claude é obrigado a buscar no cofre se aquilo já foi respondido ou decidido.
+  - `Stop`: quando uma resposta usou ferramentas e não gravou nada no cofre, o Claude é parado uma vez para registrar o conhecimento novo.
 - Para ver: abra o Obsidian, **Open folder as vault** → `~/Obsidian`, e aperte `Ctrl+G` para o gráfico.
 
 ### Graphify
