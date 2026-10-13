@@ -41,7 +41,7 @@ O que o script instala sozinho:
 | Permissões | modo `auto` |
 | Autocompact | janela de 200k tokens |
 | Bloqueio absoluto | commitar segredos (`.env`, chaves, tokens), nem com pedido |
-| Bloqueio com pedido explícito | `npm run db:push`, `npm run db:apply:prod`, `scripts/deploy.sh` |
+| Bloqueio com pedido explícito | `npm run db:push`, `npm run db:apply:prod`, `scripts/deploy.sh`, `git push --force`, `git reset --hard` |
 
 Confira as regras do modo auto com `claude auto-mode config`.
 

@@ -96,7 +96,9 @@
       "$defaults",
       "Running `npm run db:push` (or the same script via pnpm, yarn, or bun): pushes schema changes straight to the database",
       "Running `npm run db:apply:prod` (or the same script via pnpm, yarn, or bun): applies changes to the production database",
-      "Running `scripts/deploy.sh`, directly or via bash/sh: deploys the application"
+      "Running `scripts/deploy.sh`, directly or via bash/sh: deploys the application",
+      "Running `git push --force`, `git push -f`, `git push --force-with-lease` or `git push +<ref>` (also via `rtk git`) on any branch, including development branches, `develop`, `staging` and `main`, unless the user explicitly asked for a force push in this conversation",
+      "Running `git reset --hard` (also via `rtk git`) on any branch, including development branches, `develop`, `staging` and `main`, unless the user explicitly asked for it in this conversation"
     ],
     "hard_deny": [
       "$defaults",
