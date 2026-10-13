@@ -34,6 +34,7 @@ install_file() {
 
 install_file "$repo_dir/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 install_file "$repo_dir/claude/RTK.md" "$HOME/.claude/RTK.md"
+install_file "$repo_dir/claude/OBSIDIAN.md" "$HOME/.claude/OBSIDIAN.md"
 install_file "$repo_dir/claude/settings.json" "$HOME/.claude/settings.json"
 install_file "$repo_dir/claude/statusline.sh" "$HOME/.claude/statusline.sh"
 chmod +x "$HOME/.claude/statusline.sh"

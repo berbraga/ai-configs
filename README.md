@@ -25,7 +25,7 @@ O que o script instala sozinho:
 
 | Item | Para quê |
 |---|---|
-| `~/.claude/settings.json`, `CLAUDE.md`, `RTK.md`, `statusline.sh` | Configurações do Claude Code |
+| `~/.claude/settings.json`, `CLAUDE.md`, `RTK.md`, `OBSIDIAN.md`, `statusline.sh` | Configurações do Claude Code |
 | rtk | Reduz a saída dos comandos de terminal |
 | Plugins `i-have-adhd`, `ponytail`, `superpowers` | Estilo de resposta, código mínimo, brainstorm |
 | uv + graphify | Grafo do código de cada projeto |
