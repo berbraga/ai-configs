@@ -15,7 +15,9 @@ import sys
 VAULT = "Obsidian"
 EDIT_TOOLS = ("Write", "Edit", "NotebookEdit")
 LOOKUP_TOOLS = ("Read", "Grep", "Glob")
-BASH_WRITE = re.compile(r">>?\s*\S*Obsidian|\b(cp|mv|tee|touch|mkdir|sed\s+-i)\b[^|;&]*Obsidian")
+# Bash conta como escrita no cofre se cita Obsidian (direto ou via cd) e tem redirecionamento
+# real (não 2>/dev/null nem >/dev/null) ou comando que escreve.
+BASH_WRITE = re.compile(r"(?<![0-9&])>>?\s*(?!/dev/null)\S|\b(cp|mv|tee|touch|mkdir|sed\s+-i)\b")
 
 STOP_REASON = (
     "Antes de encerrar, registre no cofre ~/Obsidian/Claude todo conhecimento novo deste turno, "
@@ -89,7 +91,8 @@ def wrote_to_vault(use):
     if name in EDIT_TOOLS:
         return VAULT in str(tool_input.get("file_path", ""))
     if name == "Bash":
-        return bool(BASH_WRITE.search(str(tool_input.get("command", ""))))
+        command = str(tool_input.get("command", ""))
+        return VAULT in command and bool(BASH_WRITE.search(command))
     return False
 
 
